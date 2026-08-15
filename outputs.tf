@@ -12,7 +12,7 @@ output "msk_serverless_clusters_bootstrap_brokers_sasl_iam" {
 }
 output "msk_serverless_clusters_client_authentication" {
   description = "Map of client_authentication values across all msk_serverless_clusters, keyed the same as var.msk_serverless_clusters"
-  value       = { for k, v in aws_msk_serverless_cluster.msk_serverless_clusters : k => v.client_authentication if v.client_authentication != null && length(v.client_authentication) > 0 }
+  value       = { for k, v in aws_msk_serverless_cluster.msk_serverless_clusters : k => one(v.client_authentication) if v.client_authentication != null && length(v.client_authentication) > 0 }
 }
 output "msk_serverless_clusters_cluster_name" {
   description = "Map of cluster_name values across all msk_serverless_clusters, keyed the same as var.msk_serverless_clusters"
